@@ -23,7 +23,7 @@ int countC() {
 }
 
 
-int ThrA() {
+void ThrA() {
   struct timespec start;
   struct timespec stop;
   
@@ -36,10 +36,9 @@ int ThrA() {
   time_t duration = stop.tv_sec - start.tv_sec;
 
   printf("Thread A runtime: %lld\n", (long long) duration(NULL));
-  return 0;
 }
 
-int ThrB() {
+void ThrB() {
   struct timespec start;
   struct timespec stop;
   
@@ -52,10 +51,9 @@ int ThrB() {
   time_t duration = stop.tv_sec - start.tv_sec;
 
   printf("Thread A runtime: %lld\n", (long long) duration(NULL));
-  return 0;
 }
 
-int ThrC() {
+void ThrC() {
   struct timespec start;
   struct timespec stop;
   
@@ -68,7 +66,6 @@ int ThrC() {
   time_t duration = stop.tv_sec - start.tv_sec;
 
   printf("Thread A runtime: %lld\n", (long long) duration(NULL));
-  return 0;
 }
 
 
