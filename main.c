@@ -52,7 +52,7 @@ void *ThrB(void *no) {
   time_t duration_ = stop.tv_sec + stop.tv_nsec/1000000000 - (start.tv_sec + start.tv_nsec/1000000000);
   long double duration = (long double) duration_;
 
-  printf("Thread A runtime: %ld\n", duration);
+  printf("Thread B runtime: %ld\n", duration);
 }
 
 void *ThrC(void *no) {
@@ -68,7 +68,7 @@ void *ThrC(void *no) {
   time_t duration_ = stop.tv_sec + stop.tv_nsec/1000000000 - (start.tv_sec + start.tv_nsec/1000000000);
   long double duration = (long double) duration_;
 
-  printf("Thread A runtime: %ld\n", duration);
+  printf("Thread C runtime: %ld\n", duration);
 }
 
 
