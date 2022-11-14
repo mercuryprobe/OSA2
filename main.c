@@ -52,6 +52,7 @@ void *ThrB(void *no) {
   clock_gettime(CLOCK_REALTIME, &stop);
   sub_timespec(start, stop, &duration);
   printf("Thread A runtime: %ld.%ld\n", duration.tv_sec, duration.tv_nsec);
+}
 
 void *ThrC(void *no) {
   struct timespec start;
