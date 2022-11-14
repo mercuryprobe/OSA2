@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <pthread.h>
 #include <time.h>
+#define billion 1000000000L;
 
 
 int countA() {
@@ -33,9 +34,9 @@ void *ThrA(void *no) {
   clock_gettime(CLOCK_REALTIME, &start);
   countA();
   clock_gettime(CLOCK_REALTIME, &stop);
-  time_t duration = stop.tv_sec + stop.tv_nsec/1000000000 - (start.tv_sec + start.tv_nsec/1000000000);
+  time_t duration = stop.tv_sec + stop.tv_nsec/billion - (start.tv_sec + start.tv_nsec/billion);
 
-  printf("Thread A runtime: %llf\n", (long long double) duration);
+  printf("Thread A runtime: %Lf\n", (long double) duration);
 }
 
 void *ThrB(void *no) {
@@ -48,9 +49,9 @@ void *ThrB(void *no) {
   clock_gettime(CLOCK_REALTIME, &start);
   countB();
   clock_gettime(CLOCK_REALTIME, &stop);
-  time_t duration = stop.tv_sec + stop.tv_nsec/1000000000 - (start.tv_sec + start.tv_nsec/1000000000);
+  time_t duration = stop.tv_sec + stop.tv_nsec/billion - (start.tv_sec + start.tv_nsec/billion);
 
-  printf("Thread A runtime: %llf\n", (long long double) duration);
+  printf("Thread A runtime: %Lf\n", (long double) duration);
 }
 
 void *ThrC(void *no) {
@@ -63,9 +64,9 @@ void *ThrC(void *no) {
   clock_gettime(CLOCK_REALTIME, &start);
   countC();
   clock_gettime(CLOCK_REALTIME, &stop);
-  time_t duration = stop.tv_sec + stop.tv_nsec/1000000000 - (start.tv_sec + start.tv_nsec/1000000000);
+  time_t duration = stop.tv_sec + stop.tv_nsec/billion - (start.tv_sec + start.tv_nsec/billion);
 
-  printf("Thread A runtime: %llf\n", (long long double) duration);
+  printf("Thread A runtime: %Lf\n", (long double) duration);
 }
 
 
