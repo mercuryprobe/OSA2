@@ -35,7 +35,7 @@ void *ThrA(void *no) {
   countA();
   clock_gettime(CLOCK_REALTIME, &stop);
   
-  sub_timespec(start, finish, &duration);
+  sub_timespec(start, stop, &duration);
   printf("Thread A runtime: %ld.%ld\n", duration.tv_sec, duration.tv_nsec);
 }
 
@@ -50,7 +50,7 @@ void *ThrB(void *no) {
   clock_gettime(CLOCK_REALTIME, &start);
   countB();
   clock_gettime(CLOCK_REALTIME, &stop);
-  sub_timespec(start, finish, &duration);
+  sub_timespec(start, stop, &duration);
   printf("Thread A runtime: %ld.%ld\n", duration.tv_sec, duration.tv_nsec);
 
 void *ThrC(void *no) {
@@ -64,7 +64,7 @@ void *ThrC(void *no) {
   clock_gettime(CLOCK_REALTIME, &start);
   countC();
   clock_gettime(CLOCK_REALTIME, &stop);
-  sub_timespec(start, finish, &duration);
+  sub_timespec(start, stop, &duration);
   printf("Thread A runtime: %ld.%ld\n", duration.tv_sec, duration.tv_nsec);
 }
 
