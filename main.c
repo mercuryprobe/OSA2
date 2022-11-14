@@ -77,9 +77,9 @@ int main() {
   pthread_t thrBid;
   pthread_t thrCid;
 
-  pthread_create(&thrAid, NULL, &ThrA, NULL);
-  pthread_create(&thrBid, NULL, &ThrB, NULL);
-  pthread_create(&thrCid, NULL, &ThrC, NULL);
+  pthread_create(&thrAid, NULL, ThrA, NULL);
+  pthread_create(&thrBid, NULL, ThrB, NULL);
+  pthread_create(&thrCid, NULL, ThrC, NULL);
 
   pthread_join(thrAid, NULL);
   pthread_join(thrBid, NULL);
