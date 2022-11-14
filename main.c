@@ -26,6 +26,7 @@ int countC() {
 void *ThrA(void *no) {
   struct timespec start;
   struct timespec stop;
+  struct timespec duration;
   
   pthread_setschedparam(pthread_self(), SCHED_FIFO, NULL);
   puts("Thread A created.");
@@ -33,10 +34,9 @@ void *ThrA(void *no) {
   clock_gettime(CLOCK_REALTIME, &start);
   countA();
   clock_gettime(CLOCK_REALTIME, &stop);
-  time_t duration_ = stop.tv_sec + stop.tv_nsec/1000000000 - (start.tv_sec + start.tv_nsec/1000000000);
-  long double duration = (long double) duration_;
-
-  printf("Thread A runtime: %Lf\n", duration);
+  
+  sub_timespec(start, finish, &duration);
+  printf("Thread A runtime: %ld.%ld\n", duration.tv_sec, duration.tv_nsec);
 }
 
 void *ThrB(void *no) {
@@ -49,11 +49,8 @@ void *ThrB(void *no) {
   clock_gettime(CLOCK_REALTIME, &start);
   countB();
   clock_gettime(CLOCK_REALTIME, &stop);
-  time_t duration_ = stop.tv_sec + stop.tv_nsec/1000000000 - (start.tv_sec + start.tv_nsec/1000000000);
-  long double duration = (long double) duration_;
-
-  printf("Thread B runtime: %Lf\n", duration);
-}
+  sub_timespec(start, finish, &duration);
+  printf("Thread A runtime: %ld.%ld\n", duration.tv_sec, duration.tv_nsec);
 
 void *ThrC(void *no) {
   struct timespec start;
@@ -65,10 +62,8 @@ void *ThrC(void *no) {
   clock_gettime(CLOCK_REALTIME, &start);
   countC();
   clock_gettime(CLOCK_REALTIME, &stop);
-  time_t duration_ = stop.tv_sec + stop.tv_nsec/1000000000 - (start.tv_sec + start.tv_nsec/1000000000);
-  long double duration = (long double) duration_;
-
-  printf("Thread C runtime: %Lf\n", duration);
+  sub_timespec(start, finish, &duration);
+  printf("Thread A runtime: %ld.%ld\n", duration.tv_sec, duration.tv_nsec);
 }
 
 
