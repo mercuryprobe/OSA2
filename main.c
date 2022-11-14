@@ -42,6 +42,7 @@ void *ThrA(void *no) {
 void *ThrB(void *no) {
   struct timespec start;
   struct timespec stop;
+  struct timespec duration;
   
   pthread_setschedparam(pthread_self(), SCHED_RR, NULL);
   puts("Thread B created.");
@@ -55,6 +56,7 @@ void *ThrB(void *no) {
 void *ThrC(void *no) {
   struct timespec start;
   struct timespec stop;
+  struct timespec duration;
   
   pthread_setschedparam(pthread_self(), SCHED_OTHER, NULL);
   puts("Thread C created.");
