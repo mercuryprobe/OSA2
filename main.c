@@ -23,7 +23,7 @@ int countC() {
 }
 
 
-void ThrA() {
+void ThrA(void _) {
   struct timespec start;
   struct timespec stop;
   
@@ -39,7 +39,7 @@ void ThrA() {
   printf("Thread A runtime: %lf\n", duration);
 }
 
-void ThrB() {
+void ThrB(void _) {
   struct timespec start;
   struct timespec stop;
   
@@ -55,7 +55,7 @@ void ThrB() {
   printf("Thread A runtime: %lf\n", duration);
 }
 
-void ThrC() {
+void ThrC(void _) {
   struct timespec start;
   struct timespec stop;
   
