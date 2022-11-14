@@ -33,9 +33,10 @@ void ThrA() {
   clock_gettime(CLOCK_REALTIME, &start);
   countA();
   clock_gettime(CLOCK_REALTIME, &stop);
-  time_t duration = stop.tv_sec - start.tv_sec;
+  time_t duration_ = stop.tv_sec - start.tv_sec;
+  long double duration = (long double) duration_;
 
-  printf("Thread A runtime: %lld\n", (long long) duration(NULL));
+  printf("Thread A runtime: %lf\n", duration);
 }
 
 void ThrB() {
@@ -48,9 +49,10 @@ void ThrB() {
   clock_gettime(CLOCK_REALTIME, &start);
   countB();
   clock_gettime(CLOCK_REALTIME, &stop);
-  time_t duration = stop.tv_sec - start.tv_sec;
+  time_t duration_ = stop.tv_sec - start.tv_sec;
+  long double duration = (long double) duration_;
 
-  printf("Thread A runtime: %lld\n", (long long) duration(NULL));
+  printf("Thread A runtime: %lf\n", duration);
 }
 
 void ThrC() {
@@ -63,9 +65,10 @@ void ThrC() {
   clock_gettime(CLOCK_REALTIME, &start);
   countC();
   clock_gettime(CLOCK_REALTIME, &stop);
-  time_t duration = stop.tv_sec - start.tv_sec;
+  time_t duration_ = stop.tv_sec - start.tv_sec;
+  long double duration = (long double) duration_;
 
-  printf("Thread A runtime: %lld\n", (long long) duration(NULL));
+  printf("Thread A runtime: %lf\n", duration);
 }
 
 
@@ -74,9 +77,9 @@ int main() {
   pthread_t thrBid;
   pthread_t thrCid;
 
-  pthread_create(&thrAid, NULL, ThrA, NULL);
-  pthread_create(&thrBid, NULL, ThrB, NULL);
-  pthread_create(&thrCid, NULL, ThrC, NULL);
+  pthread_create(&thrAid, NULL, &ThrA, NULL);
+  pthread_create(&thrBid, NULL, &ThrB, NULL);
+  pthread_create(&thrCid, NULL, &ThrC, NULL);
 
   pthread_join(thrAid, NULL);
   pthread_join(thrBid, NULL);
