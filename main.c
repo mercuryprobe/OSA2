@@ -33,7 +33,7 @@ void *ThrA(void *no) {
   clock_gettime(CLOCK_REALTIME, &start);
   countA();
   clock_gettime(CLOCK_REALTIME, &stop);
-  time_t duration_ = stop.tv_sec + stop.tv_nsec/1000000000 - (start.tv_sec + stop.tv_nsec/1000000000);
+  time_t duration_ = stop.tv_sec + stop.tv_nsec/1000000000 - (start.tv_sec + start.tv_nsec/1000000000);
   long double duration = (long double) duration_;
 
   printf("Thread A runtime: %ld\n", duration);
@@ -49,7 +49,7 @@ void *ThrB(void *no) {
   clock_gettime(CLOCK_REALTIME, &start);
   countB();
   clock_gettime(CLOCK_REALTIME, &stop);
-  time_t duration_ = stop.tv_sec + stop.tv_nsec/1000000000 - (start.tv_sec + stop.tv_nsec/1000000000);
+  time_t duration_ = stop.tv_sec + stop.tv_nsec/1000000000 - (start.tv_sec + start.tv_nsec/1000000000);
   long double duration = (long double) duration_;
 
   printf("Thread A runtime: %ld\n", duration);
@@ -65,7 +65,7 @@ void *ThrC(void *no) {
   clock_gettime(CLOCK_REALTIME, &start);
   countC();
   clock_gettime(CLOCK_REALTIME, &stop);
-  time_t duration_ = stop.tv_sec + stop.tv_nsec/1000000000 - (start.tv_sec + stop.tv_nsec/1000000000);
+  time_t duration_ = stop.tv_sec + stop.tv_nsec/1000000000 - (start.tv_sec + start.tv_nsec/1000000000);
   long double duration = (long double) duration_;
 
   printf("Thread A runtime: %ld\n", duration);
