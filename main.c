@@ -5,25 +5,25 @@
 
 
 int countA() {
-  for (unsigned long int i = 1; i=<4294967296; i++) {
+  for (unsigned long int i = 1; i<=4294967296; i++) {
   }
   return 0;
 }
 
 int countB() {
-  for (unsigned long int i = 1; i=<4294967296; i++) {
+  for (unsigned long int i = 1; i<=4294967296; i++) {
   }
   return 0;
 }
 
 int countC() {
-  for (unsigned long int i = 1; i=<4294967296; i++) {
+  for (unsigned long int i = 1; i<=4294967296; i++) {
   }
   return 0;
 }
 
 
-int Thr-A() {
+int ThrA() {
   struct timespec start;
   struct timespec stop;
   
@@ -39,7 +39,7 @@ int Thr-A() {
   return 0;
 }
 
-int Thr-B() {
+int ThrB() {
   struct timespec start;
   struct timespec stop;
   
@@ -55,7 +55,7 @@ int Thr-B() {
   return 0;
 }
 
-int Thr-C() {
+int ThrC() {
   struct timespec start;
   struct timespec stop;
   
@@ -77,9 +77,9 @@ int main() {
   pthread_t thrBid;
   pthread_t thrCid;
 
-  pthread_create(&thrAid, NULL, &Thr-A, NULL);
-  pthread_create(&thrBid, NULL, &Thr-B, NULL);
-  pthread_create(&thrCid, NULL, &Thr-C, NULL);
+  pthread_create(&thrAid, NULL, &ThrA, NULL);
+  pthread_create(&thrBid, NULL, &ThrB, NULL);
+  pthread_create(&thrCid, NULL, &ThrC, NULL);
 
   pthread_join(thrAid, NULL);
   pthread_join(thrBid, NULL);
