@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <pthread.h>
 #include <time.h>
-#define BILLION  1000000000L;
 
 
 int countA() {
@@ -27,6 +26,7 @@ int countC() {
 void *ThrA(void *no) {
   struct timespec start;
   struct timespec stop;
+  long billion = 1000000000;
   
   pthread_setschedparam(pthread_self(), SCHED_FIFO, NULL);
   puts("Thread A created.");
@@ -34,7 +34,7 @@ void *ThrA(void *no) {
   clock_gettime(CLOCK_REALTIME, &start);
   countA();
   clock_gettime(CLOCK_REALTIME, &stop);
-  time_t duration = stop.tv_sec + stop.tv_nsec/BILLION - (start.tv_sec + start.tv_nsec/BILLION);
+  time_t duration = stop.tv_sec + stop.tv_nsec/billion - (start.tv_sec + start.tv_nsec/billion);
 
   printf("Thread A runtime: %Lf\n", (long double) duration);
 }
@@ -42,6 +42,7 @@ void *ThrA(void *no) {
 void *ThrB(void *no) {
   struct timespec start;
   struct timespec stop;
+  long billion = 1000000000;
   
   pthread_setschedparam(pthread_self(), SCHED_RR, NULL);
   puts("Thread B created.");
@@ -49,7 +50,7 @@ void *ThrB(void *no) {
   clock_gettime(CLOCK_REALTIME, &start);
   countB();
   clock_gettime(CLOCK_REALTIME, &stop);
-  time_t duration = stop.tv_sec + stop.tv_nsec/BILLION - (start.tv_sec + start.tv_nsec/BILLION);
+  time_t duration = stop.tv_sec + stop.tv_nsec/billion - (start.tv_sec + start.tv_nsec/billion);
 
   printf("Thread A runtime: %Lf\n", (long double) duration);
 }
@@ -57,6 +58,7 @@ void *ThrB(void *no) {
 void *ThrC(void *no) {
   struct timespec start;
   struct timespec stop;
+  long billion = 1000000000;
   
   pthread_setschedparam(pthread_self(), SCHED_OTHER, NULL);
   puts("Thread C created.");
@@ -64,7 +66,7 @@ void *ThrC(void *no) {
   clock_gettime(CLOCK_REALTIME, &start);
   countC();
   clock_gettime(CLOCK_REALTIME, &stop);
-  time_t duration = stop.tv_sec + stop.tv_nsec/BILLION - (start.tv_sec + start.tv_nsec/BILLION);
+  time_t duration = stop.tv_sec + stop.tv_nsec/billion - (start.tv_sec + start.tv_nsec/billion);
 
   printf("Thread A runtime: %Lf\n", (long double) duration);
 }
