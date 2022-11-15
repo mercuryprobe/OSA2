@@ -29,7 +29,7 @@ void *ThrA(void *no) {
   paramA.sched_priority = 0;
 
   printf("A: %d\n", pthread_setschedparam(pthread_self(), SCHED_OTHER, &paramA));
-  // perror("Error");
+  perror("Error");
   struct sched_param receiver;
   int recPol;
   pthread_getschedparam(pthread_self(), &recPol, &receiver);
@@ -52,7 +52,7 @@ void *ThrB(void *no) {
   struct sched_param paramB;
   paramB.sched_priority = 1;
   printf("B: %d\n", pthread_setschedparam(pthread_self(), SCHED_RR, &paramB));
-  // perror("Error");
+  perror("Error");
   struct sched_param receiver;
   int recPol;
   pthread_getschedparam(pthread_self(), &recPol, &receiver);
@@ -75,7 +75,7 @@ void *ThrC(void *no) {
   struct sched_param paramC;
   paramC.sched_priority = 1;
   printf("C: %d\n", pthread_setschedparam(pthread_self(), SCHED_FIFO, &paramC));
-  // perror("Error");
+  perror("Error");
   struct sched_param receiver;
   int recPol;
   pthread_getschedparam(pthread_self(), &recPol, &receiver);
