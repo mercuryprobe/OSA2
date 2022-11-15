@@ -29,9 +29,9 @@ void *ThrA(void *no) {
   paramA.sched_priority = 0;
 
   printf("A: %d\n", pthread_setschedparam(pthread_self(), SCHED_OTHER, &paramA));
-  perror("Error");
+  // perror("Error");
   printf("Aget %d\n", sched_getscheduler(pthread_self()));
-  // puts("Thread A created.");
+  puts("Thread A created.");
   struct timespec start;
   struct timespec stop;
   double billion = 1000000000;
@@ -48,9 +48,9 @@ void *ThrB(void *no) {
   struct sched_param paramB;
   paramB.sched_priority = 1;
   printf("B: %d\n", pthread_setschedparam(pthread_self(), SCHED_RR, &paramB));
-  perror("Error");
+  // perror("Error");
   printf("Bget%d\n", sched_getscheduler(pthread_self()));
-  // puts("Thread B created.");
+  puts("Thread B created.");
   struct timespec start;
   struct timespec stop;
   double billion = 1000000000;
@@ -67,9 +67,9 @@ void *ThrC(void *no) {
   struct sched_param paramC;
   paramC.sched_priority = 1;
   printf("C: %d\n", pthread_setschedparam(pthread_self(), SCHED_FIFO, &paramC));
-  perror("Error");
+  // perror("Error");
   printf("Cget%d\n", sched_getscheduler(pthread_self()));
-  // puts("Thread C created.");
+  puts("Thread C created.");
   struct timespec start;
   struct timespec stop;
   double billion = 1000000000;
