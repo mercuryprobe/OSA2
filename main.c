@@ -77,9 +77,9 @@ int main() {
   pthread_t thrAid;
   pthread_t thrBid;
   pthread_t thrCid;
-  pthread_setschedparam(ThrAid, SCHED_OTHER, NULL);
-  pthread_setschedparam(ThrBid, SCHED_RR, NULL);
-  pthread_setschedparam(ThrCid, SCHED_FIFO, NULL);
+  pthread_setschedparam(thrAid, SCHED_OTHER, NULL);
+  pthread_setschedparam(thrBid, SCHED_RR, NULL);
+  pthread_setschedparam(thrCid, SCHED_FIFO, NULL);
   pthread_create(&thrAid, NULL, ThrA, NULL);
   pthread_create(&thrBid, NULL, ThrB, NULL);
   pthread_create(&thrCid, NULL, ThrC, NULL);
