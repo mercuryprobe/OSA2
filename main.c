@@ -28,7 +28,7 @@ void *ThrA(void *no) {
   struct timespec stop;
   double billion = 1000000000;
   
-  pthread_setschedparam(pthread_self(), SCHED_FIFO, NULL);
+  pthread_setschedparam(pthread_self(), SCHED_OTHER, NULL);
   puts("Thread A created.");
   
   clock_gettime(CLOCK_REALTIME, &start);
@@ -60,7 +60,7 @@ void *ThrC(void *no) {
   struct timespec stop;
   double billion = 1000000000;
   
-  pthread_setschedparam(pthread_self(), SCHED_OTHER, NULL);
+  pthread_setschedparam(pthread_self(), SCHED_FIFO, NULL);
   puts("Thread C created.");
   
   clock_gettime(CLOCK_REALTIME, &start);
