@@ -24,11 +24,10 @@ int countC() {
 
 
 void *ThrA(void *no) {
-  struct sched_param param_;
-  param_.sched_priority = 0;
-  const struct sched_param param = param_;
+  struct sched_param param;
+  param.sched_priority = 0;
 
-  pthread_setschedparam(pthread_self(), SCHED_OTHER, param);
+  pthread_setschedparam(pthread_self(), SCHED_OTHER, &param);
   puts("Thread A created.");
   struct timespec start;
   struct timespec stop;
@@ -43,11 +42,9 @@ void *ThrA(void *no) {
 }
 
 void *ThrB(void *no) {
-  struct sched_param param_;
-  param_.sched_priority = 1;
-  const struct sched_param param = param_;
-
-  pthread_setschedparam(pthread_self(), SCHED_RR, param);
+  struct sched_param param;
+  param.sched_priority = 1;
+  pthread_setschedparam(pthread_self(), SCHED_RR, &param);
   puts("Thread B created.");
   struct timespec start;
   struct timespec stop;
@@ -62,11 +59,9 @@ void *ThrB(void *no) {
 }
 
 void *ThrC(void *no) {
-  struct sched_param param_;
-  param_.sched_priority = 1;
-  const struct sched_param param = param_;
-
-  pthread_setschedparam(pthread_self(), SCHED_FIFO, param);
+  struct sched_param param;
+  param.sched_priority = 1;
+  pthread_setschedparam(pthread_self(), SCHED_FIFO, &param);
   puts("Thread C created.");
   struct timespec start;
   struct timespec stop;
