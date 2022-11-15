@@ -80,7 +80,7 @@ void *ThrC(void *no) {
   struct sched_param paramC;
   paramC.sched_priority = 1;
 
-  int setRes = pthread_setschedparam(pthread_self(), SCHED_OTHER, &paramC);
+  int setRes = pthread_setschedparam(pthread_self(), SCHED_FIFO, &paramC);
   // printf("A: %d\n", pthread_setschedparam(pthread_self(), SCHED_OTHER, &paramC));
   if (setRes!=0) {perror("C: Error");}
 
