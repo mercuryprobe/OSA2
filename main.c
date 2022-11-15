@@ -24,11 +24,12 @@ int countC() {
 
 
 void *ThrA(void *no) {
+  pthread_setschedparam(pthread_self(), SCHED_OTHER, NULL);
   struct timespec start;
   struct timespec stop;
   double billion = 1000000000;
   
-  pthread_setschedparam(pthread_self(), SCHED_OTHER, NULL);
+  
   puts("Thread A created.");
   
   clock_gettime(CLOCK_REALTIME, &start);
@@ -40,11 +41,11 @@ void *ThrA(void *no) {
 }
 
 void *ThrB(void *no) {
+  pthread_setschedparam(pthread_self(), SCHED_RR, NULL);
   struct timespec start;
   struct timespec stop;
   double billion = 1000000000;
   
-  pthread_setschedparam(pthread_self(), SCHED_RR, NULL);
   puts("Thread B created.");
   
   clock_gettime(CLOCK_REALTIME, &start);
@@ -56,11 +57,11 @@ void *ThrB(void *no) {
 }
 
 void *ThrC(void *no) {
+  pthread_setschedparam(pthread_self(), SCHED_FIFO, NULL);
   struct timespec start;
   struct timespec stop;
   double billion = 1000000000;
   
-  pthread_setschedparam(pthread_self(), SCHED_FIFO, NULL);
   puts("Thread C created.");
   
   clock_gettime(CLOCK_REALTIME, &start);
