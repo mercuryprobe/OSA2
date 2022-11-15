@@ -66,7 +66,7 @@ void *ThrB(void *no) {
 void *ThrC(void *no) {
   struct sched_param paramC;
   paramC.sched_priority = 1;
-  printf("C: %d\n", pthread_setschedparam(pthread_self(), SCHED_FIFO, &paramC));*
+  printf("C: %d\n", pthread_setschedparam(pthread_self(), SCHED_FIFO, &paramC));
   perror("Error");
   printf("Cget%d\n", sched_getscheduler(pthread_self()));
   // puts("Thread C created.");
