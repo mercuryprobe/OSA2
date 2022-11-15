@@ -24,7 +24,10 @@ int countC() {
 
 
 void *ThrA(void *no) {
-  pthread_setschedparam(pthread_self(), SCHED_OTHER, NULL);
+  struct sched_param param;
+  param.sched_priority = 0;
+
+  pthread_setschedparam(pthread_self(), SCHED_OTHER, param);
   puts("Thread A created.");
   struct timespec start;
   struct timespec stop;
@@ -39,7 +42,9 @@ void *ThrA(void *no) {
 }
 
 void *ThrB(void *no) {
-  pthread_setschedparam(pthread_self(), SCHED_RR, NULL);
+  struct sched_param param;
+  param.sched_priority = 1;
+  pthread_setschedparam(pthread_self(), SCHED_RR, param);
   puts("Thread B created.");
   struct timespec start;
   struct timespec stop;
@@ -54,7 +59,9 @@ void *ThrB(void *no) {
 }
 
 void *ThrC(void *no) {
-  pthread_setschedparam(pthread_self(), SCHED_FIFO, NULL);
+  struct sched_param param;
+  param.sched_priority = 1;
+  pthread_setschedparam(pthread_self(), SCHED_FIFO, param);
   puts("Thread C created.");
   struct timespec start;
   struct timespec stop;
