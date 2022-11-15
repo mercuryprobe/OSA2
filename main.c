@@ -32,7 +32,7 @@ void *ThrA(void *no) {
   // perror("Error");
   struct sched_param receiver;
   int recPol;
-  pthread_getschedparam(pthread_self(), recPol, receiver);
+  pthread_getschedparam(pthread_self(), &recPol, &receiver);
   printf("Policy: %d\nPriority: %d\n", recPol, receiver);
 
   puts("Thread A created.");
@@ -55,7 +55,7 @@ void *ThrB(void *no) {
   // perror("Error");
   struct sched_param receiver;
   int recPol;
-  pthread_getschedparam(pthread_self(), recPol, receiver);
+  pthread_getschedparam(pthread_self(), &recPol, &receiver);
   printf("Policy: %d\nPriority: %d\n", recPol, receiver);
 
   puts("Thread B created.");
@@ -78,7 +78,7 @@ void *ThrC(void *no) {
   // perror("Error");
   struct sched_param receiver;
   int recPol;
-  pthread_getschedparam(pthread_self(), recPol, receiver);
+  pthread_getschedparam(pthread_self(), &recPol, &receiver);
   printf("Policy: %d\nPriority: %d\n", recPol, receiver);
 
   puts("Thread C created.");
