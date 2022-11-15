@@ -30,7 +30,11 @@ void *ThrA(void *no) {
 
   printf("A: %d\n", pthread_setschedparam(pthread_self(), SCHED_OTHER, &paramA));
   // perror("Error");
-  printf("Aget %d\n", sched_getscheduler(pthread_self()));
+  struct sched_param receiver;
+  int recPol;
+  pthread_getschedparam(pthread_self(), recPol, receiver);
+  printf("Policy: %d\nPriority: %d\n", recPol, receiver);
+
   puts("Thread A created.");
   struct timespec start;
   struct timespec stop;
@@ -49,7 +53,11 @@ void *ThrB(void *no) {
   paramB.sched_priority = 1;
   printf("B: %d\n", pthread_setschedparam(pthread_self(), SCHED_RR, &paramB));
   // perror("Error");
-  printf("Bget%d\n", sched_getscheduler(pthread_self()));
+  struct sched_param receiver;
+  int recPol;
+  pthread_getschedparam(pthread_self(), recPol, receiver);
+  printf("Policy: %d\nPriority: %d\n", recPol, receiver);
+
   puts("Thread B created.");
   struct timespec start;
   struct timespec stop;
@@ -68,7 +76,11 @@ void *ThrC(void *no) {
   paramC.sched_priority = 1;
   printf("C: %d\n", pthread_setschedparam(pthread_self(), SCHED_FIFO, &paramC));
   // perror("Error");
-  printf("Cget%d\n", sched_getscheduler(pthread_self()));
+  struct sched_param receiver;
+  int recPol;
+  pthread_getschedparam(pthread_self(), recPol, receiver);
+  printf("Policy: %d\nPriority: %d\n", recPol, receiver);
+
   puts("Thread C created.");
   struct timespec start;
   struct timespec stop;
