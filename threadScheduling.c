@@ -2,118 +2,129 @@
 #include <stdlib.h>
 #include <pthread.h>
 #include <time.h>
-#include <stdint.h>
-#include<unistd.h>
-#include <sched.h>
 #include <errno.h>
 
 
-#define BILLION 1000000000L
-
-
-void countA(){
-    long int i = 1;
-    while (i <= 4294967296){
-        i++;
-    }
+int countA() {
+  for (unsigned long int i = 1; i<=4294967296; i++) {
+  }
+  return 0;
 }
-void countB(){
-    long int j = 1;
-    while (j <= 4294967296){
-        j++;
-    }
+
+int countB() {
+  for (unsigned long int i = 1; i<=4294967296; i++) {
+  }
+  return 0;
 }
-void countC(){
-    long int k = 1;
-    while (k <= 4294967296){
-        k++;
-    }
+
+int countC() {
+  for (unsigned long int i = 1; i<=4294967296; i++) {
+  }
+  return 0;
 }
 
 
-void *Thr_A(void *arg) {
-    // myret_t *r = malloc(sizeof(myret_t));
-    printf("Starting Thread A\n");
-    double diff;
-	struct timespec start, end;
+void *ThrA(void *no) {
+  struct sched_param paramA;
+  paramA.sched_priority = 0;
 
-	/* measure monotonic time */
-	clock_gettime(CLOCK_MONOTONIC, &start);	/* mark start time */
-	countA();	/* do stuff */
-	clock_gettime(CLOCK_MONOTONIC, &end);
-    diff = (BILLION * (end.tv_sec - start.tv_sec) + end.tv_nsec - start.tv_nsec)/(double)BILLION;
-	printf("elapsed time(A) = %lf seconds\n", (double) diff);
+  int setRes = pthread_setschedparam(pthread_self(), SCHED_OTHER, &paramA);
+  // printf("A: %d\n", pthread_setschedparam(pthread_self(), SCHED_OTHER, &paramA));
+  if (setRes!=0) {perror("A: Error");}
+
+  // struct sched_param receiver;
+  // int recPol;
+  // pthread_getschedparam(pthread_self(), &recPol, &receiver);
+  // printf("--A--\nPolicy: %d\nPriority: %d\n", recPol, receiver);
+
+  puts("Thread A created.");
+  struct timespec start;
+  struct timespec stop;
+  double billion = 1000000000;
+  
+  clock_gettime(CLOCK_REALTIME, &start);
+  countA();
+  clock_gettime(CLOCK_REALTIME, &stop);
+  double duration = stop.tv_sec + stop.tv_nsec/billion - (start.tv_sec + start.tv_nsec/billion);
+
+  printf("Thread A runtime: %lf\n", duration);
 }
 
-void *Thr_B(void *arg) {
-    // myret_t *r = malloc(sizeof(myret_t));
-    
-    printf("Starting Thread B\n");
-    double diff;
-	struct timespec start, end;
+void *ThrB(void *no) {
+  struct sched_param paramB;
+  paramB.sched_priority = 1;
 
-	/* measure monotonic time */
-	clock_gettime(CLOCK_MONOTONIC, &start);	/* mark start time */
-	countB();	/* do stuff */
-	clock_gettime(CLOCK_MONOTONIC, &end);
-    diff = (BILLION * (end.tv_sec - start.tv_sec) + end.tv_nsec - start.tv_nsec)/(double) BILLION;
-	printf("elapsed time(B) = %lf seconds\n", (double) diff);
+  int setRes = pthread_setschedparam(pthread_self(), SCHED_RR, &paramB);
+  // printf("B: %d\n", pthread_setschedparam(pthread_self(), SCHED_OTHER, &paramBB));
+  if (setRes!=0) {perror("B: Error");}
+
+  // struct sched_param receiver;
+  // int recPol;
+  // pthread_getschedparam(pthread_self(), &recPol, &receiver);
+  // printf("--B--\nPolicy: %d\nPriority: %d\n", recPol, receiver);
+
+  puts("Thread B created.");
+  struct timespec start;
+  struct timespec stop;
+  double billion = 1000000000;
+  
+  clock_gettime(CLOCK_REALTIME, &start);
+  countB();
+  clock_gettime(CLOCK_REALTIME, &stop);
+  double duration = stop.tv_sec + stop.tv_nsec/billion - (start.tv_sec + start.tv_nsec/billion);
+
+  printf("Thread B runtime: %lf\n", duration);
 }
 
-void *Thr_C(void *arg) {
-    // myret_t *r = malloc(sizeof(myret_t));
-    printf("Starting Thread C\n");
-    double diff;
-	struct timespec start, end;
+void *ThrC(void *no) {
+  struct sched_param paramC;
+  paramC.sched_priority = 1;
 
-	/* measure monotonic time */
-	clock_gettime(CLOCK_MONOTONIC, &start);	/* mark start time */
-	countC();	/* do stuff */
-	clock_gettime(CLOCK_MONOTONIC, &end);
-    diff = (BILLION * (end.tv_sec - start.tv_sec) + end.tv_nsec - start.tv_nsec)/(double) BILLION;
-	printf("elapsed time(C) = %lf seconds\n", (double) diff);
+  int setRes = pthread_setschedparam(pthread_self(), SCHED_FIFO, &paramC);
+  // printf("A: %d\n", pthread_setschedparam(pthread_self(), SCHED_OTHER, &paramC));
+  if (setRes!=0) {perror("C: Error");}
+
+  // struct sched_param receiver;
+  // int recPol;
+  // pthread_getschedparam(pthread_self(), &recPol, &receiver);
+  // printf("--C--\nPolicy: %d\nPriority: %d\n", recPol, receiver);
+
+  puts("Thread C created.");
+  struct timespec start;
+  struct timespec stop;
+  double billion = 1000000000;
+  
+  clock_gettime(CLOCK_REALTIME, &start);
+  countC();
+  clock_gettime(CLOCK_REALTIME, &stop);
+  double duration = stop.tv_sec + stop.tv_nsec/billion - (start.tv_sec + start.tv_nsec/billion);
+
+  printf("Thread C runtime: %lf\n", duration);
 }
-int main(int argc, char* argv[]){
-    pthread_t A;
-    pthread_t B;
-    pthread_t C;
-
-    pthread_attr_t tattrA;
-    pthread_attr_t tattrB;
-    pthread_attr_t tattrC;
-
-    struct sched_param paramA;
-    struct sched_param paramB;
-    struct sched_param paramC;
-
-    paramA.sched_priority = 1;
-    paramB.sched_priority = 1;
-    paramC.sched_priority = 1;
-
-    pthread_attr_init(&tattrA);
-    pthread_attr_init(&tattrB);
-    pthread_attr_init(&tattrC);
-
-    pthread_attr_setinheritsched(&tattrA, PTHREAD_EXPLICIT_SCHED);
-    pthread_attr_setinheritsched(&tattrB, PTHREAD_EXPLICIT_SCHED);
-    pthread_attr_setinheritsched(&tattrC, PTHREAD_EXPLICIT_SCHED);
-
-    pthread_attr_setschedpolicy(&tattrA, SCHED_OTHER);
-    pthread_attr_setschedpolicy(&tattrB, SCHED_RR);
-    pthread_attr_setschedpolicy(&tattrC, SCHED_FIFO);
-
-    pthread_attr_setschedparam(&tattrA, &paramA);
-    pthread_attr_setschedparam(&tattrB, &paramB);
-    pthread_attr_setschedparam(&tattrC, &paramC);
 
 
-    pthread_create(&A, &tattrA, Thr_A, NULL); 
-    pthread_create(&B, &tattrB, Thr_B, NULL);
-    pthread_create(&C, &tattrC, Thr_C, NULL);
+int main() {
+  pthread_t thrAid;
+  pthread_t thrBid;
+  pthread_t thrCid;
+  printf("SCHED_OTHER: %d\n", SCHED_OTHER);
+  printf("SCHED_FIFO: %d\n", SCHED_FIFO);
+  printf("SCHED_RR: %d\n", SCHED_RR);
+  pthread_create(&thrAid, NULL, ThrA, NULL);
+  pthread_create(&thrBid, NULL, ThrB, NULL);
+  pthread_create(&thrCid, NULL, ThrC, NULL);
+  
+  // struct sched_param receiver;
+  // int recPol;
+  // pthread_getschedparam(thrAid, &recPol, &receiver);
+  // printf("--A--\nPolicy: %d\nPriority: %d\n", recPol, receiver);
+  // pthread_getschedparam(thrBid, &recPol, &receiver);
+  // printf("--B--\nPolicy: %d\nPriority: %d\n", recPol, receiver);
+  // pthread_getschedparam(thrCid, &recPol, &receiver);
+  // printf("--C--\nPolicy: %d\nPriority: %d\n", recPol, receiver);
 
-    pthread_join(A, NULL); 
-    pthread_join(B, NULL);
-    pthread_join(C, NULL);
-    
-    return 0;
+  pthread_join(thrAid, NULL);
+  pthread_join(thrBid, NULL);
+  pthread_join(thrCid, NULL);
+  return 0;
 }
