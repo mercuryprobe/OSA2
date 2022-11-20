@@ -97,106 +97,104 @@ void compile3() {
     }
 }
 
-void processA() {
-    struct timespec start;
-    struct timespec stop;
-    double billion = 1000000000;
+// void processA() {
+//     struct timespec start;
+//     struct timespec stop;
+//     double billion = 1000000000;
   
-    clock_gettime(CLOCK_REALTIME, &start);
-    pid_t pid = fork();
-    int stat;
-    if (pid==0) {
-        puts("Process A started!"); 
-        struct sched_param paramA;
-        paramA.sched_priority = 0;
-        int setRes =  1;
-        setRes = sched_setscheduler(0, SCHED_OTHER, &paramA);
-        if (setRes!=0) {perror("A: Error");}
+//     clock_gettime(CLOCK_REALTIME, &start);
+//     pid_t pid = fork();
+//     int stat;
+//     if (pid==0) {
+//         puts("Process A started!"); 
+//         struct sched_param paramA;
+//         paramA.sched_priority = 0;
+//         int setRes =  1;
+//         setRes = sched_setscheduler(0, SCHED_OTHER, &paramA);
+//         if (setRes!=0) {perror("A: Error");}
         
-        char *arr[16] = {"./runnerA.sh", NULL};
-        execvp("./runnerA.sh", arr);
+//         char *arr[16] = {"./runnerA.sh", NULL};
+//         execvp("./runnerA.sh", arr);
 
-    } else if(pid>0) {
+//     } else if(pid>0) {
         
-        waitpid(pid, &stat, 0);
-        clock_gettime(CLOCK_REALTIME, &stop);
+//         waitpid(pid, &stat, 0);
+//         clock_gettime(CLOCK_REALTIME, &stop);
 
-        double duration = stop.tv_sec + stop.tv_nsec/billion - (start.tv_sec + start.tv_nsec/billion);
+//         double duration = stop.tv_sec + stop.tv_nsec/billion - (start.tv_sec + start.tv_nsec/billion);
 
-        printf("Process A runtime: %lf\n", duration);
+//         printf("Process A runtime: %lf\n", duration);
 
-    } else {
-        puts("Process A failed to fork!");
-    }
-}
+//     } else {
+//         puts("Process A failed to fork!");
+//     }
+// }
 
-void processB() {
-    struct timespec start;
-    struct timespec stop;
-    double billion = 1000000000;
+// void processB() {
+//     struct timespec start;
+//     struct timespec stop;
+//     double billion = 1000000000;
   
-    clock_gettime(CLOCK_REALTIME, &start);
-    pid_t pid = fork();
-    int stat;
-    if (pid==0) {
-        puts("Process B started!");
-        struct sched_param paramB;
-        paramB.sched_priority = 1;
-        int setRes =  1;
-        setRes = sched_setscheduler(0, SCHED_RR, &paramB);
-        if (setRes!=0) {perror("B: Error");}
+//     clock_gettime(CLOCK_REALTIME, &start);
+//     pid_t pid = fork();
+//     int stat;
+//     if (pid==0) {
+//         puts("Process B started!");
+//         struct sched_param paramB;
+//         paramB.sched_priority = 1;
+//         int setRes =  1;
+//         setRes = sched_setscheduler(0, SCHED_RR, &paramB);
+//         if (setRes!=0) {perror("B: Error");}
         
-        char *arr[16] = {"./runnerB.sh", NULL};
-        execvp("./runnerB.sh", arr);
+//         char *arr[16] = {"./runnerB.sh", NULL};
+//         execvp("./runnerB.sh", arr);
 
-    } else if(pid>0) {
-        waitpid(pid, &stat, 0);
-        clock_gettime(CLOCK_REALTIME, &stop);
+//     } else if(pid>0) {
+//         waitpid(pid, &stat, 0);
+//         clock_gettime(CLOCK_REALTIME, &stop);
 
-        double duration = stop.tv_sec + stop.tv_nsec/billion - (start.tv_sec + start.tv_nsec/billion);
+//         double duration = stop.tv_sec + stop.tv_nsec/billion - (start.tv_sec + start.tv_nsec/billion);
 
-        printf("Process B runtime: %lf\n", duration);
+//         printf("Process B runtime: %lf\n", duration);
 
-    } else {
-        puts("Process B failed to fork!");
-    }
-}
+//     } else {
+//         puts("Process B failed to fork!");
+//     }
+// }
 
-void processC() {
-    struct timespec start;
-    struct timespec stop;
-    double billion = 1000000000;
+// void processC() {
+//     struct timespec start;
+//     struct timespec stop;
+//     double billion = 1000000000;
   
-    clock_gettime(CLOCK_REALTIME, &start);
-    pid_t pid = fork();
-    int stat;
-    if (pid==0) {
-        puts("Process C started!");
-        struct sched_param paramC;
-        paramC.sched_priority = 1;
-        int setRes =  1;
-        setRes = sched_setscheduler(0, SCHED_FIFO, &paramC);
-        if (setRes!=0) {perror("C: Error");}
+//     clock_gettime(CLOCK_REALTIME, &start);
+//     pid_t pid = fork();
+//     int stat;
+//     if (pid==0) {
+//         puts("Process C started!");
+//         struct sched_param paramC;
+//         paramC.sched_priority = 1;
+//         int setRes =  1;
+//         setRes = sched_setscheduler(0, SCHED_FIFO, &paramC);
+//         if (setRes!=0) {perror("C: Error");}
         
-        char *arr[16] = {"./runnerC.sh", NULL};
-        execvp("./runnerC.sh", arr);
+//         char *arr[16] = {"./runnerC.sh", NULL};
+//         execvp("./runnerC.sh", arr);
 
-    } else if(pid>0) {
-        waitpid(pid, &stat, 0);
-        clock_gettime(CLOCK_REALTIME, &stop);
+//     } else if(pid>0) {
+//         waitpid(pid, &stat, 0);
+//         clock_gettime(CLOCK_REALTIME, &stop);
 
-        double duration = stop.tv_sec + stop.tv_nsec/billion - (start.tv_sec + start.tv_nsec/billion);
+//         double duration = stop.tv_sec + stop.tv_nsec/billion - (start.tv_sec + start.tv_nsec/billion);
 
-        printf("Process C runtime: %lf\n", duration);
+//         printf("Process C runtime: %lf\n", duration);
 
-    } else {
-        puts("Process C failed to fork!");
-    }
-}
+//     } else {
+//         puts("Process C failed to fork!");
+//     }
+// }
 
 int main() {
-    processA();
-    processB();
-    processC();
+    compile3();
     return 0;
 }
