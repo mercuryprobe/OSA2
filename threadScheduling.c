@@ -32,10 +32,10 @@ void *ThrA(void *no) {
   // printf("A: %d\n", pthread_setschedparam(pthread_self(), SCHED_OTHER, &paramA));
   if (setRes!=0) {perror("A: Error");}
 
-  struct sched_param receiver;
-  int recPol;
-  pthread_getschedparam(pthread_self(), &recPol, &receiver);
-  printf("--A--\nPolicy: %d\nPriority: %d\n", recPol, receiver);
+  // struct sched_param receiver;
+  // int recPol;
+  // pthread_getschedparam(pthread_self(), &recPol, &receiver);
+  // printf("--A--\nPolicy: %d\nPriority: %d\n", recPol, receiver);
 
   puts("Thread A created.");
   struct timespec start;
@@ -58,10 +58,10 @@ void *ThrB(void *no) {
   // printf("B: %d\n", pthread_setschedparam(pthread_self(), SCHED_OTHER, &paramBB));
   if (setRes!=0) {perror("B: Error");}
 
-  struct sched_param receiver;
-  int recPol;
-  pthread_getschedparam(pthread_self(), &recPol, &receiver);
-  printf("--B--\nPolicy: %d\nPriority: %d\n", recPol, receiver);
+  // struct sched_param receiver;
+  // int recPol;
+  // pthread_getschedparam(pthread_self(), &recPol, &receiver);
+  // printf("--B--\nPolicy: %d\nPriority: %d\n", recPol, receiver);
 
   puts("Thread B created.");
   struct timespec start;
@@ -84,10 +84,10 @@ void *ThrC(void *no) {
   // printf("A: %d\n", pthread_setschedparam(pthread_self(), SCHED_OTHER, &paramC));
   if (setRes!=0) {perror("C: Error");}
 
-  struct sched_param receiver;
-  int recPol;
-  pthread_getschedparam(pthread_self(), &recPol, &receiver);
-  printf("--C--\nPolicy: %d\nPriority: %d\n", recPol, receiver);
+  // struct sched_param receiver;
+  // int recPol;
+  // pthread_getschedparam(pthread_self(), &recPol, &receiver);
+  // printf("--C--\nPolicy: %d\nPriority: %d\n", recPol, receiver);
 
   puts("Thread C created.");
   struct timespec start;
@@ -113,6 +113,15 @@ int main() {
   pthread_create(&thrAid, NULL, ThrA, NULL);
   pthread_create(&thrBid, NULL, ThrB, NULL);
   pthread_create(&thrCid, NULL, ThrC, NULL);
+  
+  struct sched_param receiver;
+  int recPol;
+  pthread_getschedparam(thrAid, &recPol, &receiver);
+  printf("--A--\nPolicy: %d\nPriority: %d\n", recPol, receiver);
+  pthread_getschedparam(thrBid, &recPol, &receiver);
+  printf("--B--\nPolicy: %d\nPriority: %d\n", recPol, receiver);
+  pthread_getschedparam(thrCid, &recPol, &receiver);
+  printf("--C--\nPolicy: %d\nPriority: %d\n", recPol, receiver);
 
   pthread_join(thrAid, NULL);
   pthread_join(thrBid, NULL);
