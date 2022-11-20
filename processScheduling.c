@@ -17,7 +17,8 @@ void processA() {
     if (pid==0) {
         struct sched_param paramA;
         paramA.sched_priority = 0;
-        int setRes = sched_setscheduler(0, SCHED_OTHER, &paramA);
+        int setRes =  1;
+        setRes = sched_setscheduler(0, SCHED_OTHER, &paramA);
         if (setRes!=0) {perror("A: Error");}
 
         char *arr1[48] = {"cd", "kernel1build/linux-5.19.81/linux-5.19.8", NULL};
