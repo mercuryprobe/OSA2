@@ -114,14 +114,14 @@ int main() {
   pthread_create(&thrBid, NULL, ThrB, NULL);
   pthread_create(&thrCid, NULL, ThrC, NULL);
   
-  struct sched_param receiver;
-  int recPol;
-  pthread_getschedparam(thrAid, &recPol, &receiver);
-  printf("--A--\nPolicy: %d\nPriority: %d\n", recPol, receiver);
-  pthread_getschedparam(thrBid, &recPol, &receiver);
-  printf("--B--\nPolicy: %d\nPriority: %d\n", recPol, receiver);
-  pthread_getschedparam(thrCid, &recPol, &receiver);
-  printf("--C--\nPolicy: %d\nPriority: %d\n", recPol, receiver);
+  // struct sched_param receiver;
+  // int recPol;
+  // pthread_getschedparam(thrAid, &recPol, &receiver);
+  // printf("--A--\nPolicy: %d\nPriority: %d\n", recPol, receiver);
+  // pthread_getschedparam(thrBid, &recPol, &receiver);
+  // printf("--B--\nPolicy: %d\nPriority: %d\n", recPol, receiver);
+  // pthread_getschedparam(thrCid, &recPol, &receiver);
+  // printf("--C--\nPolicy: %d\nPriority: %d\n", recPol, receiver);
 
   pthread_join(thrAid, NULL);
   pthread_join(thrBid, NULL);
