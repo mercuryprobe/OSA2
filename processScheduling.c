@@ -20,7 +20,7 @@ void processA() {
         int setRes = sched_setscheduler(0, SCHED_OTHER, &paramA);
         if (setRes!=0) {perror("A: Error");}
 
-        char *arr1[48] = {"cd", "~/kernelbuild/linux-5.19.81/linux-5.19.8"};
+        char *arr1[48] = {"cd", "kernelbuild/linux-5.19.81/linux-5.19.8"};
         char *arr7[8] = {"pwd"};
         char *arr2[16] = {"make", "mrproper"};
         char *arr3[8] = {"cd", ".."};
