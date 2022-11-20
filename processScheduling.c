@@ -5,8 +5,6 @@
 #include <sys/wait.h>
 #include <sched.h>
 #include <time.h>
-#define blue "\x1b[94m"
-#define reset "\x1b[0m"
 
 void compile3() {
     struct timespec startA;
@@ -18,14 +16,13 @@ void compile3() {
 
     double billion = 1000000000;
     int setRes =  1;
-
+    int stat;
     
     pid_t pidA = fork();
-    int stat;
 
     if (pidA==0) {
         clock_gettime(CLOCK_REALTIME, &startA);
-        printf(blue "Process A started!\n" reset);
+        printf("Process A started!\n");
         
         struct sched_param paramA;
         paramA.sched_priority = 0;
@@ -37,11 +34,10 @@ void compile3() {
 
     } else if (pidA>0) {
         pid_t pidB = fork();
-        int stat;
 
         if (pidB==0) {
             clock_gettime(CLOCK_REALTIME, &startB);
-            printf(blue "Process B started!\n" reset);
+            printf("Process B started!\n");
 
             struct sched_param paramB;
             paramB.sched_priority = 1;
@@ -53,16 +49,15 @@ void compile3() {
 
         } else if (pidB>0) {
             pid_t pidC = fork();
-            int stat;
             
             if (pidC==0) {
                 clock_gettime(CLOCK_REALTIME, &startC);
-                printf(blue "Process C started!" reset);
+                printf("Process C started!");
 
                 struct sched_param paramC;
                 paramC.sched_priority = 1;                
                 setRes = sched_setscheduler(0, SCHED_FIFO, &paramC);
-                if (setRes!=0) {perror("B: Error");}
+                if (setRes!=0) {perror("C: Error");}
                 
                 char *arr[16] = {"./runnerC.sh", NULL};
                 execvp("./runnerC.sh", arr);
@@ -73,9 +68,9 @@ void compile3() {
                     int curID = waitpid(-1, &stat, 0);
                     
                     if (pidA==curID) {clock_gettime(CLOCK_REALTIME, &stopA);}
-                    if (pidA==curID) {clock_gettime(CLOCK_REALTIME, &stopB);}
-                    if (pidA==curID) {clock_gettime(CLOCK_REALTIME, &stopC);}
-                    finishedThreads -=1;
+                    if (pidB==curID) {clock_gettime(CLOCK_REALTIME, &stopB);}
+                    if (pidC==curID) {clock_gettime(CLOCK_REALTIME, &stopC);}
+                    finishedThreads +=1;
 
                 }
             } else {
@@ -90,9 +85,9 @@ void compile3() {
         double durationB = stopB.tv_sec + stopB.tv_nsec/billion - (startB.tv_sec + startB.tv_nsec/billion);
         double durationC = stopC.tv_sec + stopC.tv_nsec/billion - (startC.tv_sec + startC.tv_nsec/billion);
 
-        printf(blue "Process A runtime: %lf\n" reset, durationA);
-        printf(blue "Process B runtime: %lf\n" reset, durationB);
-        printf(blue "Process C runtime: %lf\n" reset, durationC);
+        printf("Process A runtime: %lf\n", durationA);
+        printf("Process B runtime: %lf\n", durationB);
+        printf("Process C runtime: %lf\n", durationC);
 
     } else {
         puts("Process A failed to fork!");
