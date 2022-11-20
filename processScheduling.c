@@ -21,20 +21,7 @@ void processA() {
         setRes = sched_setscheduler(0, SCHED_OTHER, &paramA);
         if (setRes!=0) {perror("A: Error");}
 
-        char *arr1[48] = {"cd", "kernel1build/linux-5.19.81/linux-5.19.8", NULL};
-        char *arr7[8] = {"pwd", NULL};
-        char *arr2[16] = {"make", "mrproper", NULL};
-        char *arr3[8] = {"cd", "..", NULL};
-        char *arr4[48] = {"cp", ".config", "linux-5.19.81/linux-5.19.8", NULL};
-        char *arr5[48] = {"cd", "linux-5.19.81/linux-5.19.8", NULL};
-        char *arr6[8] = {"make", NULL};
-        execvp("cd", arr1);
-        execvp("pwd", arr7);
-        execvp("make", arr2);
-        execvp("cd", arr3);
-        execvp("cp", arr4);
-        execvp("cd", arr5);
-        execvp("make", arr6);
+        execvp("./runnerA.sh", NULL);
 
     } else if(pid>0) {
         waitpid(pid, &stat, 0);
