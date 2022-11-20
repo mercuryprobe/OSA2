@@ -72,7 +72,7 @@ void compile3() {
             countB();
 
         } else if (pidB>0) {
-            pid_t pi    dC = fork();
+            pid_t pidC = fork();
             
             if (pidC==0) {
                 clock_gettime(CLOCK_REALTIME, &startC);
