@@ -40,10 +40,10 @@ void compile3() {
     int setRes =  1;
     int stat;
     
+    clock_gettime(CLOCK_REALTIME, &startA);
     pid_t pidA = fork();
 
     if (pidA==0) {
-        clock_gettime(CLOCK_REALTIME, &startA);
         printf("Process A started!\n");
         
         struct sched_param paramA;
@@ -56,10 +56,10 @@ void compile3() {
         countA();
 
     } else if (pidA>0) {
+        clock_gettime(CLOCK_REALTIME, &startB);
         pid_t pidB = fork();
-
+        
         if (pidB==0) {
-            clock_gettime(CLOCK_REALTIME, &startB);
             printf("Process B started!\n");
 
             struct sched_param paramB;
@@ -72,10 +72,10 @@ void compile3() {
             countB();
 
         } else if (pidB>0) {
+            clock_gettime(CLOCK_REALTIME, &startC);
             pid_t pidC = fork();
             
             if (pidC==0) {
-                clock_gettime(CLOCK_REALTIME, &startC);
                 printf("Process C started!\n");
 
                 struct sched_param paramC;
