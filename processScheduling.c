@@ -21,14 +21,14 @@ void processA() {
         if (setRes!=0) {perror("A: Error");}
 
         char *arr1[48] = {"kernelbuild/linux-5.19.81/linux-5.19.8"};
-        char *arr7[8] = {"pwd"};
+        // char *arr7[8] = {"pwd"};
         char *arr2[16] = {"mrproper"};
         char *arr3[8] = {".."};
         char *arr4[48] = {".config", "linux-5.19.81/linux-5.19.8"};
         char *arr5[48] = {"linux-5.19.81/linux-5.19.8"};
         // char *arr6[8] = {"make"};
         execvp("/bin/cd", arr1);
-        execvp("/bin/pwd", arr7);
+        execvp("/bin/pwd", NULL);
         execvp("/bin/make", arr2);
         execvp("/bin/cd", arr3);
         execvp("/bin/cp", arr4);
