@@ -107,9 +107,9 @@ int main() {
   pthread_t thrAid;
   pthread_t thrBid;
   pthread_t thrCid;
-  // printf("SCHED_OTHER: %d\n", SCHED_OTHER);
-  // printf("SCHED_FIFO: %d\n", SCHED_FIFO);
-  // printf("SCHED_RR: %d\n", SCHED_RR);
+  printf("SCHED_OTHER: %d\n", SCHED_OTHER);
+  printf("SCHED_FIFO: %d\n", SCHED_FIFO);
+  printf("SCHED_RR: %d\n", SCHED_RR);
   pthread_create(&thrAid, NULL, ThrA, NULL);
   pthread_create(&thrBid, NULL, ThrB, NULL);
   pthread_create(&thrCid, NULL, ThrC, NULL);
