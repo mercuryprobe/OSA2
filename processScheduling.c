@@ -76,7 +76,7 @@ void compile3() {
             
             if (pidC==0) {
                 clock_gettime(CLOCK_REALTIME, &startC);
-                printf("Process C started!");
+                printf("Process C started!\n");
 
                 struct sched_param paramC;
                 paramC.sched_priority = 1;                
