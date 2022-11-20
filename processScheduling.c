@@ -5,6 +5,8 @@
 #include <sys/wait.h>
 #include <sched.h>
 #include <time.h>
+#define blue "\x1b[94m"
+#define reset "\x1b[0m"
 
 void compile3() {
     struct timespec startA;
@@ -23,7 +25,7 @@ void compile3() {
 
     if (pidA==0) {
         clock_gettime(CLOCK_REALTIME, &startA);
-        puts("Process A started!");
+        printf(blue "Process A started!\n" reset);
         
         struct sched_param paramA;
         paramA.sched_priority = 0;
@@ -39,7 +41,7 @@ void compile3() {
 
         if (pidB==0) {
             clock_gettime(CLOCK_REALTIME, &startB);
-            puts("Process B started!");
+            printf(blue "Process B started!\n" reset);
 
             struct sched_param paramB;
             paramB.sched_priority = 1;
@@ -55,7 +57,7 @@ void compile3() {
             
             if (pidC==0) {
                 clock_gettime(CLOCK_REALTIME, &startC);
-                puts("Process C started!");
+                printf(blue "Process C started!" reset);
 
                 struct sched_param paramC;
                 paramC.sched_priority = 1;                
@@ -88,9 +90,9 @@ void compile3() {
         double durationB = stopB.tv_sec + stopB.tv_nsec/billion - (startB.tv_sec + startB.tv_nsec/billion);
         double durationC = stopC.tv_sec + stopC.tv_nsec/billion - (startC.tv_sec + startC.tv_nsec/billion);
 
-        printf("Process A runtime: %lf\n", durationA);
-        printf("Process B runtime: %lf\n", durationB);
-        printf("Process C runtime: %lf\n", durationC);
+        printf(blue "Process A runtime: %lf\n" reset, durationA);
+        printf(blue "Process B runtime: %lf\n" reset, durationB);
+        printf(blue "Process C runtime: %lf\n" reset, durationC);
 
     } else {
         puts("Process A failed to fork!");
