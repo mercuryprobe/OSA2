@@ -6,28 +6,6 @@
 #include <sched.h>
 #include <time.h>
 
-int countA() {
-  for (unsigned long int i = 1; i<=4294967296; i++) {
-  }
-  puts("A done");
-  return 0;
-}
-
-int countB() {
-  for (unsigned long int i = 1; i<=4294967296; i++) {
-  }
-  puts("B done");
-  return 0;
-}
-
-int countC() {
-  for (unsigned long int i = 1; i<=4294967296; i++) {
-  }
-  puts("C done");
-  return 0;
-}
-
-
 void compile3() {
     struct timespec startA;
     struct timespec stopA;
@@ -51,9 +29,8 @@ void compile3() {
         setRes = sched_setscheduler(0, SCHED_OTHER, &paramA);
         if (setRes!=0) {perror("A: Error");}
         
-        // char *arr[16] = {"./runnerA.sh", NULL};
-        // execvp("./runnerA.sh", arr);
-        countA();
+        char *arr[16] = {"./runnerA.sh", NULL};
+        execvp("./runnerA.sh", arr);
 
     } else if (pidA>0) {
         clock_gettime(CLOCK_REALTIME, &startB);
@@ -67,9 +44,8 @@ void compile3() {
             setRes = sched_setscheduler(0, SCHED_RR, &paramB);
             if (setRes!=0) {perror("B: Error");}
             
-            // char *arr[16] = {"./runnerB.sh", NULL};
-            // execvp("./runnerB.sh", arr);
-            countB();
+            char *arr[16] = {"./runnerB.sh", NULL};
+            execvp("./runnerB.sh", arr);
 
         } else if (pidB>0) {
             clock_gettime(CLOCK_REALTIME, &startC);
@@ -83,9 +59,8 @@ void compile3() {
                 setRes = sched_setscheduler(0, SCHED_FIFO, &paramC);
                 if (setRes!=0) {perror("C: Error");}
                 
-                // char *arr[16] = {"./runnerC.sh", NULL};
-                // execvp("./runnerC.sh", arr);
-                countC();
+                char *arr[16] = {"./runnerC.sh", NULL};
+                execvp("./runnerC.sh", arr);
 
             } else if (pidC>0) {
                 int finishedThreads = 0;
