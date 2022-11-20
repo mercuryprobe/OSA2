@@ -25,6 +25,7 @@ void processA() {
         execvp("./runnerA.sh", arr);
 
     } else if(pid>0) {
+        puts("Process A started!");
         waitpid(pid, &stat, 0);
         clock_gettime(CLOCK_REALTIME, &stop);
 
@@ -46,10 +47,11 @@ void processB() {
     pid_t pid = fork();
     int stat;
     if (pid==0) {
+        puts("Process B started!");
         struct sched_param paramB;
-        paramB.sched_priority = 0;
+        paramB.sched_priority = 1;
         int setRes =  1;
-        setRes = sched_setscheduler(0, SCHED_OTHER, &paramB);
+        setRes = sched_setscheduler(0, SCHED_RR, &paramB);
         if (setRes!=0) {perror("B: Error");}
         
         char *arr[16] = {"./runnerB.sh", NULL};
@@ -77,10 +79,11 @@ void processC() {
     pid_t pid = fork();
     int stat;
     if (pid==0) {
+        puts("Process C started!");
         struct sched_param paramC;
-        paramC.sched_priority = 0;
+        paramC.sched_priority = 1;
         int setRes =  1;
-        setRes = sched_setscheduler(0, SCHED_OTHER, &paramC);
+        setRes = sched_setscheduler(0, SCHED_FIFO, &paramC);
         if (setRes!=0) {perror("C: Error");}
         
         char *arr[16] = {"./runnerC.sh", NULL};
