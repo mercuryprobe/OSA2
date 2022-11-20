@@ -20,8 +20,9 @@ void processA() {
         int setRes =  1;
         setRes = sched_setscheduler(0, SCHED_OTHER, &paramA);
         if (setRes!=0) {perror("A: Error");}
-
-        execvp("./runnerA.sh", NULL);
+        
+        char *arr[16] = {"./runnerA.sh", NULL};
+        execvp("./runnerA.sh", arr);
 
     } else if(pid>0) {
         waitpid(pid, &stat, 0);
