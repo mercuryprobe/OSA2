@@ -29,6 +29,7 @@ void *ThrA(void *no) {
   paramA.sched_priority = 0;
 
   int setRes = pthread_setschedparam(pthread_self(), SCHED_OTHER, &paramA);
+  nice(0);
   // printf("A: %d\n", pthread_setschedparam(pthread_self(), SCHED_OTHER, &paramA));
   if (setRes!=0) {perror("A: Error");}
 
