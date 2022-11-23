@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <linux/syscalls.h>
 #include <linux/kernel.h>
+#define kernel_2d_memcpy 451
 
 int checker(int** given, int** actual, int nArr, int arrDepth) {
     for (int i = 0; i<nArr; i++) {
@@ -27,7 +28,7 @@ int main() {
 
 
     int callResult;
-    callResult = syscall(kernel_2d_memcpy, array, target, 8, 8);
+    callResult = syscall(451, array, target, 8, 8);
     if (callResult==0) {
         if (checker(target, array, 8, 8)==0) {
             puts("Copy successful!");
