@@ -18,6 +18,15 @@ int main() {
         }
     }
 
+    puts("Original Target: ");
+    for (int i = 0; i<nArr; i++) {
+        for (int j = 0; j<arrDepth; j++) {
+            printf("%d ", target[i][j]);
+        }
+        printf("\n");
+    }
+    puts("");
+
     int callResult;
     int fail = 0;
     callResult = syscall(451, array, target, 8, 8);
