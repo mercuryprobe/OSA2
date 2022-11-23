@@ -33,6 +33,13 @@ int main() {
 
         if (fail==0) {
             puts("Copy successful!");
+            for (int i = 0; i<nArr; i++) {
+                for (int j = 0; j<arrDepth; j++) {
+                    printf("%d ", target[i][j]);
+                }
+                printf("\n");
+            }
+
         } else {
             puts("Copy failed!");
         }
