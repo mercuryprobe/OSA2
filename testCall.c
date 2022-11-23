@@ -4,9 +4,6 @@
 // #include <linux/kernel.h>
 #define kernel_2d_memcpy 451
 
-int checker(int** given, int** actual, int nArr, int arrDepth) {
-    
-}
 
 int main() {
     int nArr = 8;
@@ -26,7 +23,7 @@ int main() {
     if (callResult==0) {
         for (int i = 0; i<nArr; i++) {
             for (int j = 0; j<arrDepth; j++) {
-                if (given[i][j] != actual[i][j]) {
+                if (array[i][j] != target[i][j]) {
                     fail = 1;
                     break;
                 }
