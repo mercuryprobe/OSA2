@@ -29,6 +29,7 @@ void compile3() {
         paramA.sched_priority = 0;
         setRes = sched_setscheduler(0, SCHED_OTHER, &paramA);
         if (setRes!=0) {perror("A: Error");}
+        if (setpriority(0, 0, -20)!=0) {perror("A: Nice Error");};
         
         char *arr[16] = {"./runnerA.sh", NULL};
         execvp("./runnerA.sh", arr);
@@ -41,7 +42,7 @@ void compile3() {
             printf("Process B started!\n");
 
             struct sched_param paramB;
-            paramB.sched_priority = 1;
+            paramB.sched_priority = 99;
             setRes = sched_setscheduler(0, SCHED_RR, &paramB);
             if (setRes!=0) {perror("B: Error");}
             
@@ -56,7 +57,7 @@ void compile3() {
                 printf("Process C started!\n");
 
                 struct sched_param paramC;
-                paramC.sched_priority = 1;                
+                paramC.sched_priority = 99;                
                 setRes = sched_setscheduler(0, SCHED_FIFO, &paramC);
                 if (setRes!=0) {perror("C: Error");}
                 
