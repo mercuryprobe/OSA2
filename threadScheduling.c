@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#define _XOPEN_SOURCE 500
 #include <pthread.h>
 #include <time.h>
 #include <errno.h>
