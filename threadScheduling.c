@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#define _XOPEN_SOURCE 500
+#include <sys/resource.h>
 #include <pthread.h>
 #include <time.h>
 #include <errno.h>
@@ -30,9 +30,9 @@ void *ThrA(void *no) {
   paramA.sched_priority = 0;
 
   int setRes = pthread_setschedparam(pthread_self(), SCHED_OTHER, &paramA);
-  nice(0);
   // printf("A: %d\n", pthread_setschedparam(pthread_self(), SCHED_OTHER, &paramA));
   if (setRes!=0) {perror("A: Error");}
+  if (setsetpriority(0, 0, 0)!=0) {perror("A: Nice Error");};
 
   // struct sched_param receiver;
   // int recPol;
