@@ -32,7 +32,7 @@ void *ThrA(void *no) {
   int setRes = pthread_setschedparam(pthread_self(), SCHED_OTHER, &paramA);
   // printf("A: %d\n", pthread_setschedparam(pthread_self(), SCHED_OTHER, &paramA));
   if (setRes!=0) {perror("A: Error");}
-  if (setsetpriority(0, 0, 0)!=0) {perror("A: Nice Error");};
+  if (setpriority(0, 0, 0)!=0) {perror("A: Nice Error");};
 
   // struct sched_param receiver;
   // int recPol;
